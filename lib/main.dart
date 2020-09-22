@@ -21,7 +21,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Rehber"),
+        title: Text("Contacts"),
         centerTitle: true,
       ),
       body: ListView.builder(
