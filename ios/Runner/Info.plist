@@ -41,5 +41,7 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
+	<key>NSContactsUsageDescription</key>  
+<string>Uygulama rehberinizi listelemek için izne gerek duymaktadır.</string>
 </dict>
 </plist>

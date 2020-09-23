@@ -1,0 +1,65 @@
+PODS:
+  - device_info (0.0.1):
+    - Flutter
+  - devicelocale (0.0.1):
+    - Flutter
+  - Flutter (1.0.0)
+  - flutter_contact (0.0.1):
+    - Flutter
+  - flutter_native_timezone (0.0.1):
+    - Flutter
+  - get_ip (0.0.1):
+    - Flutter
+  - libphonenumber (0.0.1):
+    - Flutter
+    - libPhoneNumber-iOS
+  - libPhoneNumber-iOS (0.9.15)
+  - "permission_handler (5.0.1+1)":
+    - Flutter
+
+DEPENDENCIES:
+  - device_info (from `.symlinks/plugins/device_info/ios`)
+  - devicelocale (from `.symlinks/plugins/devicelocale/ios`)
+  - Flutter (from `Flutter`)
+  - flutter_contact (from `.symlinks/plugins/flutter_contact/ios`)
+  - flutter_native_timezone (from `.symlinks/plugins/flutter_native_timezone/ios`)
+  - get_ip (from `.symlinks/plugins/get_ip/ios`)
+  - libphonenumber (from `.symlinks/plugins/libphonenumber/ios`)
+  - permission_handler (from `.symlinks/plugins/permission_handler/ios`)
+
+SPEC REPOS:
+  trunk:
+    - libPhoneNumber-iOS
+
+EXTERNAL SOURCES:
+  device_info:
+    :path: ".symlinks/plugins/device_info/ios"
+  devicelocale:
+    :path: ".symlinks/plugins/devicelocale/ios"
+  Flutter:
+    :path: Flutter
+  flutter_contact:
+    :path: ".symlinks/plugins/flutter_contact/ios"
+  flutter_native_timezone:
+    :path: ".symlinks/plugins/flutter_native_timezone/ios"
+  get_ip:
+    :path: ".symlinks/plugins/get_ip/ios"
+  libphonenumber:
+    :path: ".symlinks/plugins/libphonenumber/ios"
+  permission_handler:
+    :path: ".symlinks/plugins/permission_handler/ios"
+
+SPEC CHECKSUMS:
+  device_info: d7d233b645a32c40dfdc212de5cf646ca482f175
+  devicelocale: feebbe5e7a30adb8c4f83185de1b50ff19b44f00
+  Flutter: 0e3d915762c693b495b44d77113d4970485de6ec
+  flutter_contact: d83afd11b19da4d0e7df41b254c84fbb88ef0616
+  flutter_native_timezone: e72ff1900460ff57cfd331d1758050c9269f3e99
+  get_ip: c063133e0a399ae4089048c90d6a232cb2344846
+  libphonenumber: bd14d5abfc5939ab0b0767234e2d8e2593af258e
+  libPhoneNumber-iOS: 0a32a9525cf8744fe02c5206eb30d571e38f7d75
+  permission_handler: eac8e15b4a1a3fba55b761d19f3f4e6b005d15b6
+
+PODFILE CHECKSUM: aafe91acc616949ddb318b77800a7f51bffa2a4c
+
+COCOAPODS: 1.8.4
