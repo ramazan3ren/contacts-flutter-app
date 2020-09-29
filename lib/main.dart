@@ -10,6 +10,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: HomePage(),
+      theme: ThemeData(primarySwatch: Colors.blue),
     );
   }
 }
@@ -22,7 +23,11 @@ class HomePage extends StatefulWidget {
 class Row {
   Contact contact;
   bool checked;
-  Row(this.contact, this.checked);
+
+  Row(
+    this.contact,
+    this.checked,
+  );
 }
 
 class _HomePageState extends State<HomePage> {
@@ -74,10 +79,17 @@ class _HomePageState extends State<HomePage> {
     if (this.permissionState) {
       await (Contacts.streamContacts()).forEach((element) {
         setState(() {
-          this.contacts.add(new Row(element, false));
+          this.contacts.add(new Row(
+                element,
+                false,
+              ));
         });
       });
     }
+  }
+
+  _deleteSelected(int id) async {
+    await Contacts.deleteContact();
   }
 
   //Eğer kullanıcı rehbere erişim izni vermemiş ise bu ekran açılacak.
@@ -103,34 +115,74 @@ class _HomePageState extends State<HomePage> {
     if (!this.permissionState) {
       return _notPermitted();
     }
-    return ListView.builder(
-      itemCount: contacts.length,
-      itemBuilder: (context, index) {
-        Row row = contacts[index];
-        return _contactCard(row);
-      },
+    return Container(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Expanded(
+            flex: 2,
+            child: Container(
+              padding: EdgeInsets.only(top: 70, left: 10),
+              height: 50,
+              child: Text(
+                "Contacts",
+                style: TextStyle(fontSize: 45, fontWeight: FontWeight.bold),
+              ),
+            ),
+          ),
+          Expanded(
+            flex: 0,
+            child: CheckboxListTile(
+              value: false,
+              onChanged: (value) {},
+              title: Text("Tümünü Seç"),
+            ),
+          ),
+          Expanded(
+              child: FlatButton(
+            child: Text("Sil"),
+            onPressed: _deleteSelected(0),
+          )),
+          Expanded(
+            flex: 9,
+            child: ListView.builder(
+              itemCount: contacts.length,
+              itemBuilder: (context, index) {
+                Row row = contacts[index];
+                return _contactCard(row);
+              },
+            ),
+          ),
+        ],
+      ),
     );
   }
 
   Widget _contactCard(Row row) {
-    return Padding(
-      padding: const EdgeInsets.only(left: 10, right: 10),
-      child: Card(
-        margin: EdgeInsets.all(10),
-        elevation: 10,
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
+    return Card(
+      margin: EdgeInsets.only(bottom: 6, top: 5, left: 10, right: 10),
+      elevation: 8,
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: GestureDetector(
+          onTap: () {
+            setState(() {
+              row.checked = !row.checked;
+            });
+          },
           child: ListTile(
             title: Text(
               row.contact.displayName,
               style: TextStyle(color: Colors.black87),
             ),
-            leading: Icon(
-              Icons.account_circle,
-              size: 45,
-              color: Colors.black87,
+            leading: CircleAvatar(
+              backgroundColor: Colors.white,
+              maxRadius: 20,
+              minRadius: 20,
+              child: Image.asset("assets/data/man.png"),
             ),
             trailing: Checkbox(
+              activeColor: Colors.black87,
               value: row.checked,
               onChanged: (incomingValue) {
                 setState(() {
@@ -141,11 +193,14 @@ class _HomePageState extends State<HomePage> {
           ),
         ),
       ),
+      shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(Radius.circular(25))),
     );
   }
 
   @override
   Widget build(BuildContext context) {
+    int id = 0 ;
     return Scaffold(
       body: _body(),
     );
