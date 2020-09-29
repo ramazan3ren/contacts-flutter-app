@@ -31,6 +31,7 @@ class Row {
 }
 
 class _HomePageState extends State<HomePage> {
+  bool selectAllState = false;
   bool permissionState = false;
   //Rehber kayıtları bu listede yer alacak.
   //Liste içinde bir adet "contact" bir de "bool" değer var.
@@ -88,8 +89,16 @@ class _HomePageState extends State<HomePage> {
     }
   }
 
-  _deleteSelected(int id) async {
-    await Contacts.deleteContact();
+  deleteSelected() {
+    for (var i = 0; i < this.contacts.length; i++) {
+      var contact = this.contacts[i];
+      if (contact.checked) {
+        Contacts.deleteContact(contact.contact);
+        setState(() {
+          this.contacts.removeAt(i);
+        });
+      }
+    }
   }
 
   //Eğer kullanıcı rehbere erişim izni vermemiş ise bu ekran açılacak.
@@ -133,15 +142,22 @@ class _HomePageState extends State<HomePage> {
           Expanded(
             flex: 0,
             child: CheckboxListTile(
-              value: false,
-              onChanged: (value) {},
+              value: this.selectAllState,
+              onChanged: (value) {
+                setState(() {
+                  this.selectAllState = value;
+                  this.contacts.forEach((element) {
+                    element.checked = value;
+                  });
+                });
+              },
               title: Text("Tümünü Seç"),
             ),
           ),
           Expanded(
               child: FlatButton(
             child: Text("Sil"),
-            onPressed: _deleteSelected(0),
+            onPressed: deleteSelected,
           )),
           Expanded(
             flex: 9,
@@ -200,7 +216,6 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    int id = 0 ;
     return Scaffold(
       body: _body(),
     );
